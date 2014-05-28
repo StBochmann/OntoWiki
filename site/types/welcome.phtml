@@ -1,0 +1,20 @@
+<header class="intro">
+<h1> <?php echo $this->title ?> </h1>
+</header>
+<div class="content">
+<?php
+ // uses default content properties
+ // echo $this->literal(array('tag' => 'div', 'class' => 'content'));
+?>
+	<span><?php $this->description ?><span>
+	<?php 
+           $this->query(
+	       array(
+ 		  'where' => '{?resourceUri a sioc:Post } ',
+		  'template' => 'post',
+		  'limit' => '10'
+	       )
+           )
+        ?>
+</div>
+

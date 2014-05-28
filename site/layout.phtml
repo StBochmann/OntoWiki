@@ -1,0 +1,190 @@
+<?php
+/**
+ * This file is part of the {@link http://ontowiki.net OntoWiki} project.
+ *
+ * @copyright Copyright (c) 2011, {@link http://aksw.org AKSW}
+ * @license http://opensource.org/licenses/gpl-license.php GNU General Public License (GPL)
+ */
+
+/**
+ * example site extension layout template
+ */
+
+// this is the standard template data
+$templateData           = $this->templateData;
+?><!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $templateData['title'] ?> &mdash; <?php echo $this->siteConfig['name'] ?></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="generator" content="<?php echo $this->generator ?>" />
+
+    <link rel="alternate" type="application/rdf+xml" href="<?php echo $this->resourceUri ?>.rdf" />
+    <link rel="pingback" href="<?php echo $this->pingbackUrl ?>" />
+
+    <link rel="<?php echo $this->curie('http://xmlns.com/foaf/0.1/primaryTopic') ?>" href="<?php echo $this->resourceUri?>" />
+   <!-- <link type="text/css" href="<?php echo $this->baseUri ?>/css/bootstrap.css" rel="stylesheet" /> -->
+	<link type="text/css" href="<?php echo $this->baseUri ?>/css/all.min.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.js"></script>
+
+<!--    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<?php
+    // includes the GA header script
+    // includes the exhibit header links
+    // other head scripts
+    $this->headScript();
+?>
+</head>
+
+<body<?php
+    foreach ($this->namespaces as $prefix => $ns): ?><?php echo ' xmlns:' . $prefix . '="' . $ns . '"' ?><?php endforeach; ?>>
+<div class="page-margin">
+    <div id="page">
+	<header id="header" >
+	    <h1><a href="/"><img src="<?php echo $this->baseUri; ?>/images/logo-aksw.png" alt="Agile Knowledge Engineering and Semantic Web (AKSW) Research Group"/></a></h1>
+            <?php
+                $navResource = $this->templateOptions()->getValue('http://rdfs.org/ns/void#rootResource');
+                $navOptions = array(
+                    'navResource' => $navResource,
+                    'navId' => 'nav-main',
+                    'suffix'    => '<!-- /#nav-main -->',
+                    'activeUrl' => $this->resourceUri
+                   // 'listClass' => 'nav',
+                   // 'navClass' => 'nav-collapse'
+                );
+                echo $this->navigationList($navOptions);
+            ?>
+	    <nav>
+		<form id="search" action="#" method="get" role="search">
+			<fieldset>
+				<legend>Search</legend>
+				<input type="text" id="searchterm" value="" />
+				<button type="submit">Search</button>
+			</fieldset>
+		</form>
+	    </nav>
+        </header>
+	<hr class="hideme" />
+
+	<article id="content">
+		<?php echo $this->renderx(); ?> 
+
+	</article>
+	<section id="sidecontent">
+		<aside id="associations">
+			<h2> Hosted by </h2>
+			<a href="http://uni-leipzig.de"><img src="<?php echo $this->baseUri; ?>/images/logo-unileipzig.png" alt="Universität Leipzig" /></a> <span>,</span>
+			<a href="http://infai.org"><img src="<?php echo $this->baseUri; ?>/images/logo-infai.png" alt="InfAI: Institut für Angewandte Informatik" /></a>
+			<h2> Funded by </h2>
+			<div class="small">
+				<a href="http://bmbf.de/en/"><img src="<?php echo $this->baseUri; ?>/images/logo-bmbf.png" alt="Federal Ministry of Education" /></a> <span>,</span>
+				<a href="http://cordis.europa.eu/fp7/home_en.html"<img src="<?php $this->baseUri; ?>/images/logo-fp7.png" alt="EU Seventh Framework Programme (FP7)" /></a> <span>,</span>
+				<a href="http://www.daad.de/en/" class="small"><img src="<?php echo $this->baseUri; ?>/images/logo-daad.png" alt="German Academic Exchange Service" /></a> <span>,</span>
+				<a href="http://dfg.de/en/" class="small"><img src="<?php echo $this->baseUri; ?>/images/logo-dfg.png" alt="German Research Foundation" /></a>
+			</div>
+		</aside>
+	</section>
+	<footer id="footer">
+	    <aside id="articleinfo">
+              <div class="subc">
+
+
+           	 <dl class="resourceoptions">
+                	<dt class="hideme">Resource info &amp; options</dt>
+                	<dd>
+                    		<span class="icon icon-resource-download" title="download resource as">download resource as:</span>
+                   	        <a rel="nofollow" href="<?php echo $this->resourceUri ?>.rdf">rdf/xml</a>,
+                    		<a rel="nofollow" href="<?php echo $this->resourceUri ?>.ttl">turtle</a>
+                	</dd>
+                	<dd><span class="icon icon-resource-edit"></span> <a rel="nofollow" href="<?php echo $editUrl ?>">view/edit resource</a></dd>
+                	<dd><span class="icon icon-template-edit"></span> <a rel="nofollow" href="https://github.com/AKSW/aksw.org/tree/master/site/types">view/edit templates</a></dd>
+                	<!-- dd>
+				<span class="icon icon-browse" title="browse resource using">browse resource using:</span>
+				<a rel="nofollow" href="http://dataviewer.zitgist.com/?uri=<?php echo urlencode($this->resourceUri); ?>">Zitgist</a>,
+				<a rel="nofollow" href="http://dig.csail.mit.edu/2005/ajar/release/tabulator/0.8/tab.html?uri=<?php echo urlencode($this->resourceUri); ?>">Tabulator</a>
+			</dd-->
+            	</dl>
+              </div>
+    	   </aside>
+    	   <aside id="userinfo">
+        	<div class="subc">
+            	   <dl class="siteoptions">
+                	<dt class="hideme">aksw.org site options</dt>
+                	<dd>
+                    		<span class="icon icon-service-github">Github:</span>
+                    		<a rel="nofollow" href="https://github.com/AKSW/aksw.org">site repository</a>
+                	</dd>
+                	<dd>
+                    		<span class="icon icon-service-github">Github:</span>
+                    		<a rel="nofollow" href="https://github.com/AKSW/aksw.org/issues">site issues</a>
+                	</dd>
+                	<dd>
+                    		<span class="icon icon-service-xxx">Service:</span>
+                    		<a rel="nofollow" href="https://github.com/AKSW/aksw.org/wiki/_pages">site documentation</a>
+                	</dd>
+            	   </dl>
+        	</div>
+    	   </aside>
+	</footer>
+<script type="text/javascript">
+  var GoSquared = {};
+  GoSquared.acct = "GSN-386459-F";
+    (function(w){
+        function gs(){
+              w._gstc_lt = +new Date;
+              var d = document, g = d.createElement("script");
+              g.type = "text/javascript";
+              g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+              var s = d.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(g, s);
+            }
+        w.addEventListener ?
+          w.addEventListener("load", gs, false) :
+          w.attachEvent("onload", gs);
+      })(window);
+  </script>
+
+    Status
+    API
+    Training
+    Shop
+    Blog
+    About
+
+    © 2014 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Contact
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo $this->baseUri ?>/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUri ?>/js/bootstrap.js"></script>
+
+</body>
+</html>
+
