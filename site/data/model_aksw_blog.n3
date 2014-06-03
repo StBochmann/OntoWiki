@@ -19,7 +19,7 @@
    void:rootResource <Navigation/Main> .
 
 <Navigation/Main> a site:Navigation ;
-                  rdf:_1 <Beitrag> ;
+                  rdf:_1 <Beiträge> ;
                   rdfs:label "Main Navigation" .
 
 # <Welcome> a foaf:Document ;
@@ -27,29 +27,21 @@
 #          site:content "Congratulations and welcome to the example for the [site extension](https://github.com/AKSW/site.ontowiki \"OntoWiki Site Extension ong github\") for [OntoWiki](http://ontowiki.net/ \"OntoWiki Homepage\"). This example site demonstrates some functionality which is covered by the site extension. You can take this example as a starting point for your own OntoWiki powered Site."^^sysont:Markdown ;
 #          site:template "welcome" .
 
-<Agent> a foaf:Agent ;
-	  foaf:holds_Account <MaMuMa> .
+<Agent-Max-Mustermann> a foaf:Agent .
 
 
 <MaxMustermann> a foaf:Person ;
 	   	 rdfs:label "Max Mustermann" ;
-	   	 rdfs:subClassOf <Agent> ; 
+	   	 rdfs:subClassOf <Agent-Max-Mustermann> ; 
 	   	 foaf:fistname "Max" ;
 	   	 foaf:lastname "Mustermann" .
-	   
-<MaMuMa> a foaf:OnlineAccount ;
-           foaf:accountName "MaMuMa" ;
-	   sysont:userPassword "123" .
 
 
 <Mein-erster-semantischer-Blog> a sioct:BlogPost ;
-	 			rdfs:label "Mein erster semantischer Blogbeitrag" ;
 				dcterms:title "Mein erster semantischer Blogbeitrag!!!!!!" ;
 				site:content "Der erste Beitrag!! Geschafft es funktioniert" ;
-				rdfs:subClassOf <Beitrag> ;
-				sioc:has_creator <MaMuMa> ;
-				foaf:maker <MaxMustermann> ;
-				site:template "welcome" .
+				rdfs:subClassOf <Beiträge> ;
+				site:template "post" .
 
 
 <Allgemein> a skos:Concept ;
@@ -57,20 +49,20 @@
 
 
 <Comment> a sioct:Comment ;
-	    rdfs:subClassOf <Beitrag> ;
+	    rdfs:subClassOf <Beiträge> ;
 	    dcterms:created "07.05.2014" ;
-	    sioc:content "mein erster Kommentar" .
+	    sioc:content "Mein erster Kommentar" .
 
 
-<Beitrag> a sioc:Post ;
-	    sioc:has_reply <Beitrag> ;
-	    rdfs:label "Beitragxyzff" ;
+<Beiträge> a sioc:Post ;
+	    sioc:has_reply <Beiträge> ;
+	    rdfs:label "Beiträge" ;
 	    rdfs:subClassof <Item> ;
 	    site:template "welcome" .
 
 <Item> a sioc:Item ;
 	 sioc:has_container <SBlogAKSW> ;
-	 foaf:maker <Agent> .
+	 foaf:maker <Agent-Max-Mustermann> .
 
 
 <SBlogAKSW> a sioc:Container ;

@@ -10,8 +10,16 @@
  * example site extension layout template
  */
 
+// edit link for the universal edit button
+$editUrl = $this->wikiBaseUrl .'view?r=' . urlencode($this->resourceUri);
+
 // this is the standard template data
-$templateData           = $this->templateData;
+$templateData = $this->templateData;
+
+$memoryModel = new Erfurt_Rdf_MemoryModel($this->description);
+$types = $memoryModel->getValues($this->resourceUri, EF_RDF_TYPE);
+
+
 ?><!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <head>
@@ -23,22 +31,71 @@ $templateData           = $this->templateData;
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="generator" content="<?php echo $this->generator ?>" />
 
-    <link rel="alternate" type="application/rdf+xml" href="<?php echo $this->resourceUri ?>.rdf" />
-    <link rel="pingback" href="<?php echo $this->pingbackUrl ?>" />
+    <script type="text/javascript">document.documentElement.className += 'js';</script>
+    <!--[if lte IE 8]>
+<script type="text/javascript">
+var html4elements = 'article footer header nav section aside time';
+html4elements.replace(/\w+/g,function(n){document.createElement(n)})
+</script>
+<![endif]-->
 
-    <link rel="<?php echo $this->curie('http://xmlns.com/foaf/0.1/primaryTopic') ?>" href="<?php echo $this->resourceUri?>" />
-   <!-- <link type="text/css" href="<?php echo $this->baseUri ?>/css/bootstrap.css" rel="stylesheet" /> -->
-	<link type="text/css" href="<?php echo $this->baseUri ?>/css/all.min.css" rel="stylesheet" />
-    <!-- jQuery -->
-    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.js"></script>
+    <link
+        rel="<?php echo $this->curie('http://xmlns.com/foaf/0.1/primaryTopic') ?>"
+        href="<?php echo $this->resourceUri?>" />
 
-<!--    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
+    <link
+        rel="stylesheet" type="text/css" media="all"
+        href="<?php echo $this->baseUri ?>/css/all.min.css"
+        title="Standard" />
+    <link
+        rel="stylesheet" type="text/css" media="all"
+        href="<?php echo $this->baseUri ?>/css/addons.css"
+        title="Standard" />
+    <link
+        rel="icon"
+        type="image/png"
+        href="<?php echo $this->baseUri ?>/images/favicon.png" />
+
+    <link rel="alternate"
+        type="application/wiki"
+        title="Edit this page!"
+        href="javascript:myEdit()" />
+
+    <!-- TODO: we should include all the js via a parallel loading script.
+* separates the js logic from templates/html/caches
+* improves performance
 -->
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="<?php echo $this->baseUri ?>/libs/rscarousel/jquery.rs.carousel.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUri ?>/libs/rscarousel/jquery.rs.carousel-autoscroll.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUri ?>/libs/fancybox/jquery.fancybox-1.3.4.css"/>
+    <script type="text/javascript" src="<?php echo $this->baseUri ?>/libs/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+    <script type="text/javascript">RDFAUTHOR_BASE='<?php echo $this->libraryUrlBase ?>RDFauthor';</script>
+    <script type="text/javascript" src="<?php echo $this->libraryUrlBase ?>RDFauthor/src/rdfauthor.js"></script>
+    <script type="text/javascript">
+        function myEdit() {
+            RDFauthor.edit({
+                loadOwStylesheet: false,
+                onSubmitSuccess: function() {
+                  // HACK: reload whole page after 500 ms
+                  window.setTimeout(function () {
+                      window.location.href = window.location.href;
+                  }, 500);
+                },
+                targetSparqlEndpoint: '/sparql',
+                targetUpdateEndpoint: '/update',
+                targetGraph: 'http://aksw.org/',
+                targetResource: '<?php echo $this->resourceUri ?>'
+            });
+        };
+    </script>
+
+    <script type="text/javascript" src="<?php echo $this->baseUri ?>/scripts/settings/media.dev.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUri ?>/scripts/search.js"></script>
+
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
