@@ -34,12 +34,15 @@ if (!Erfurt_Uri::check($resourceUri)) {
         'uri' => $resourceUri, 'property' => 'aksw:hookline',
         'tag' => 'span', 'class' => 'hookline', 'prefix' => ' – ')
     );
-    $link = $this->link(array(
-        'uri' => $resourceUri, 'text' => $title
-    ))
+
 ?>
     <li class="<?php echo $oddclass ?>" about="<?php echo $this->curie($resourceUri) ?>">
-        <?php echo $link , $hookline ?>
+	<a href="<?= $this->url($resourceUri)?>">
+	  <span about="<?= $resourceUri ?>">
+	    <?= $title ?>
+          </span>
+        </a>        
+	<?php echo $hookline ?>
     </li>
 <?php
 }
