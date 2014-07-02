@@ -37,7 +37,7 @@ if (!Erfurt_Uri::check($resourceUri)) {
 
 ?>
     <li class="<?php echo $oddclass ?>" about="<?php echo $this->curie($resourceUri) ?>">
-	<a href="<?= $this->url($resourceUri)?>">
+	<a href="<?= $resourceUri ?>">
 	  <span about="<?= $resourceUri ?>">
 	    <?= $title ?>
           </span>
