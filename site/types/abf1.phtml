@@ -1,0 +1,18 @@
+<header class="intro">
+<h1> <?php echo $this->title ?> </h1>
+</header>
+<?php
+// uses default content properties
+//echo $this->literal(array('tag' => 'div', 'class' => 'content'));
+
+$posts = $this->query(
+       	   array(
+	     'where' => '{?blog sioc:topic ?resourceUri}',
+	     'template' => 'post',
+	     'limit' => ''
+           )
+         );
+
+ echo $posts;
+?>
+</div>
