@@ -21,17 +21,25 @@
 
 ### Schema-Modellierung
 
-sioc:Post rdfs:subClassOf sioc:Item .
+sioc:Container site:classTemplate "welcome" .
 
-sioc:Post site:classTemplate "post" .
+sioc:Forum rdfs:subClassOf sioc:Container .
+
+sioct:Weblog rdfs:subClassOf sioc:Forum .
+
+sioc:Post rdfs:subClassOf sioc:Item ;
+
+          site:classTemplate "post" .
 
 sioct:BlogPost rdfs:subClassOf sioc:Post .
 
-sioct:Comment rdfs:subClassOf sioc:Post .
+sioct:Comment rdfs:subClassOf sioc:Post ;
 
-foaf:Person rdfs:subClassOf foaf:Agent . 
+              site:classTemplate "comment" .
 
-foaf:Person site:classTemplate "person" .
+foaf:Person rdfs:subClassOf foaf:Agent ; 
+
+            site:classTemplate "person" .
 
 foaf:Document site:classTemplate "document" .
 
@@ -78,8 +86,22 @@ rdf:type a owl:ObjectProperty ;
 
 <Navigation/Main> a site:Navigation ;
                   rdf:_1 <Beiträge> ;
+		  rdf:_2 <Abfrage1> ;
+		  rdf:_3 <Abfrage2> ;
+		  rdf:_4 <Abfrage3> ;
+		  rdf:_5 <Abfrage4> ;
+		  rdf:_6 <Abfrage5> ;
+		  rdf:_7 <Abfrage6> ;
                   rdfs:label "Main Navigation" .
 
+
+<Beiträge> site:template "welcome" .
+<Abfrage1> site:template "abf1" .
+<Abfrage2> site:template "abf2" .
+<Abfrage3> site:template "abf3" .
+<Abfrage4> site:template "abf4" .
+<Abfrage5> site:template "abf5" .
+<Abfrage6> site:template "abf6" .
 
 <SBlogAKSW> a sioc:Container ;
 	      sioc:container_of <Item> .
@@ -129,7 +151,7 @@ rdf:type a owl:ObjectProperty ;
 
 <Willkommen> a sioct:Comment ;
 	    dct:created "03.06.2014" ;
-	    sioc:about <Mein-erster-semantischer-Blog>
+	    sioc:about <Mein-erster-semantischer-Blog> ;
 	    foaf:maker <MaxMustermann> ;
 	    sioc:has_reply <DankeMax> ;
 	    sioc:content "Wilkommen im auf unseren AKSW-Blog" .
@@ -137,7 +159,7 @@ rdf:type a owl:ObjectProperty ;
 
 <DankeMax> a sioct:Comment ;
 	    dct:created "04.06.2014" ;
-	    sioc:about <Willkommen>
+	    sioc:about <Willkommen> ;
 	    foaf:maker <StefanBochmann> ;
 	    sioc:content "Vielen Dank für den Willkommensgruß Max Mustermann" .
 	  

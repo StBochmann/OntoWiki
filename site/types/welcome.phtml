@@ -6,18 +6,12 @@
 //echo $this->literal(array('tag' => 'div', 'class' => 'content'));
 ?>
 <div class="content">
-<nav class="nav-sidelinks">
-<ul>
-  <li><a href="" > Sidenav1 </a></li>
-  <li><a href="" > Sidenav2 </a></li>
-</ul>
-</nav>
 <?php
 $posts = $this->query(
        	   array(
 	     'where' => '{?resourceUri a sioct:BlogPost}',
 	     'template' => 'post',
-	     'limit' => '10'
+	     'limit' => ''
            )
          );
  echo $posts;

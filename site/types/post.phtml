@@ -1,10 +1,40 @@
+<?php
+// prepare hookline and abstract (both optional)
+
+$created = $this->literal(array(
+    'property' => 'dct:created',
+    'tag' => 'p',
+    'class' => 'created'
+));
+
+$maker = $this->literal(array(
+    'property' => 'foaf:maker',
+    'tag' => 'p',
+    'class' => 'maker'
+));
+
+$posts = $this->query(
+       	   array(
+	     'where' => '{ ?resourceUri sioc:about ?post .
+			   ?resourceUri a sioct:Comment .
+			   filter (?post = <http://blog.aksw.org/2013/ontowiki-feature-of-the-week-lov-integration/>) }',
+	     'template' => 'post',
+	     'limit' => ''
+           )
+         );
+
+?>
 <header class="intro">
-<h1> <?php echo $this->title ?> </h1>
+<h1> <?php echo $this->title ?></h1>
+<?php echo $maker, $created ?>
 </header>
 <div class="content">
 <p><?php
  // uses default content properties
   echo $this->literal(array('tag' => 'div', 'class' => 'content'));
 ?> </p>
-<p> im types/post.phtml</p>
+<p>
+<h1> Kommentare </h1>
+<?php  echo $posts ?>
+</p>
 </div>

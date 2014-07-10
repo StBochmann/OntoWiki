@@ -121,7 +121,7 @@ body{font-family:'Droid Sans','Verdana','Arial',sans-serif;color:#333;background
 .page_margins{font-size:.813em;line-height:1.538}
 h1,h2,h3,h4,details summary,h5,h6{font-weight:normal;color:black}
 h1 a,h2 a,h3 a,h4 a,details summary a,h5 a,h6 a{color:black!important}
-.intro h1{font-size:3.077em;line-height:1;margin-top:.5em;margin-bottom:.5em;text-transform:none}
+.intro h1{font-size:35px;line-height:1;margin-top:.5em;margin-bottom:.5em;text-transform:none}
 .intro h1 .hookline{display:block;color:#585858;font-size:.5em;line-height:1.5;width:90%;font-variant:normal}
 #sidecontent h1,#sidecontent h2,#sidecontent h3,#sidecontent h4,#sidecontent details summary,details #sidecontent summary,#sidecontent h5,#sidecontent h6{font-size:.993em;font-variant:normal;font-weight:bold;text-transform:none;color:black}
 #sidecontent h1{font-size:1.41em;line-height:1.091;padding:.407em 0;border-style:solid none;border-color:#333;border-width:1px;margin-bottom:.667em}
@@ -341,7 +341,7 @@ blockquote:before,blockquote:after,q:before,q:after{content:""}
 }
 @media all{.page_margins{font-size:.813em;margin:0 auto;width:86.692em;max-width:90%;min-width:800px}
 #page{padding-top:1.692em;padding-right:1.769em;padding-bottom:0;padding-left:12.308em} 
-#header{position:relative} header h1{margin:0;font-size:1em;/*margin-left:-8.692em;*/width:10.615em} header 
+#header{position:relative} header h1{margin:0;font-size:1em;/*margin-left:-8.692em;width:10.615em*/} header 
 #h1 img,#header h1 a{display:block;width:100%;height:auto} associations{margin-bottom:1em} associations 
 #img,#associations 
 #a{display:inline-block;height:auto;max-width:100%;line-height:1;vertical-align:middle} associations 
