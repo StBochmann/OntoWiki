@@ -85,84 +85,19 @@ rdf:type a owl:ObjectProperty ;
 ### Instanzenmodellierung
 
 <Navigation/Main> a site:Navigation ;
-                  rdf:_1 <Beiträge> ;
+                  rdf:_1 <Beitragsliste> ;
 		  rdf:_2 <Abfrage1> ;
 		  rdf:_3 <Abfrage2> ;
 		  rdf:_4 <Abfrage3> ;
 		  rdf:_5 <Abfrage4> ;
-		  rdf:_6 <Abfrage5> ;
-		  rdf:_7 <Abfrage6> ;
                   rdfs:label "Main Navigation" .
 
 
-<Beiträge> site:template "welcome" .
+<Beitragsliste> site:template "container" .
 <Abfrage1> site:template "abf1" .
 <Abfrage2> site:template "abf2" .
 <Abfrage3> site:template "abf3" .
 <Abfrage4> site:template "abf4" .
-<Abfrage5> site:template "abf5" .
-<Abfrage6> site:template "abf6" .
-
-<SBlogAKSW> a sioc:Container ;
-	      sioc:container_of <Item> .
-
-
-<StefanBochmann> a foaf:Person ;
-	   	 rdfs:label "Stefan Bochmann" ; 
-	   	 foaf:fistname "Stefan" ;
-	   	 foaf:lastname "Bochmann" .
-		 # E-Mail Adresse
-
-
-<MaxMustermann> a foaf:Person ;
-	   	 rdfs:label "Max Mustermann" ; 
-	   	 foaf:fistname "Max" ;
-	   	 foaf:lastname "Mustermann" .
-		 # E-Mail Adresse
-
-<Mein-erster-semantischer-Blog> a sioct:BlogPost ;
-				dct:title "Mein erster semantischer Blogbeitrag!!!!!!" ;
-				site:content "Der erste Beitrag!! Geschafft es funktioniert: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." ;
-				sioc:has_reply <Willkommen> ;
-			        sioc:has_container <SBlogAKSW> ;
-			        foaf:maker <StefanBochmann> .
-
-
-<DerZweiteBeitrag> a sioct:BlogPost ;
-				dct:title "Der zweite Beitrag!!!!!!" ;
-				site:content "Mein zweiter Beitrag: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." ;
-			        sioc:has_container <SBlogAKSW> ;
-			        foaf:maker <StefanBochmann> .
-
-
-			  
-<AKSWBlog> a skos:Concept ;
-	     skos:prefLabel "Allgemein" .
-
-<Allgemein> a skos:Concept ;
-	      skos:prefLabel "Allgemein" ;
-	      skos:hasTopConcept <AKWSBlog> . 
-
-<TagAKWS> a ctag:Tag ;
-	    ctag:label "AKSW" ;
-	    ctag:taggingDate "03.06.2014" ;
-	    ctag:means "http://aksw.org" .
-
-
-<Willkommen> a sioct:Comment ;
-	    dct:created "03.06.2014" ;
-	    sioc:about <Mein-erster-semantischer-Blog> ;
-	    foaf:maker <MaxMustermann> ;
-	    sioc:has_reply <DankeMax> ;
-	    sioc:content "Wilkommen im auf unseren AKSW-Blog" .
-
-
-<DankeMax> a sioct:Comment ;
-	    dct:created "04.06.2014" ;
-	    sioc:about <Willkommen> ;
-	    foaf:maker <StefanBochmann> ;
-	    sioc:content "Vielen Dank für den Willkommensgruß Max Mustermann" .
-	  
 
 
 <> a foaf:Document ;

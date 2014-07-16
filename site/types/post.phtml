@@ -4,13 +4,12 @@
 $created = $this->literal(array(
     'property' => 'dct:created',
     'tag' => 'p',
-    'class' => 'created'
+    'node' => true 
 ));
 
-$maker = $this->literal(array(
-    'property' => 'foaf:maker',
-    'tag' => 'p',
-    'class' => 'maker'
+$maker = $this->query(array(
+    'where' => '<'.$this->resourceUri.'> foaf:maker ?resourceUri',
+    'template' => 'resource'
 ));
 
 $posts = $this->query(
@@ -26,7 +25,8 @@ $posts = $this->query(
 ?>
 <header class="intro">
 <h1> <?php echo $this->title ?></h1>
-<?php echo $maker, $created ?>
+<?php echo $maker?>
+<?php echo $this->date($created) ?>
 </header>
 <div class="content">
 <p><?php

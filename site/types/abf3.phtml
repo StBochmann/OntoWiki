@@ -1,18 +1,27 @@
 <header class="intro">
 <h1> <?php echo $this->title ?> </h1>
 </header>
+<div class="content">
 <?php
 // uses default content properties
 //echo $this->literal(array('tag' => 'div', 'class' => 'content'));
 
-$posts = $this->query(
-       	   array(
-	     'where' => '{?resourceUri sioc:topic <http://aksw.org/category/announcements>}',
-	     'template' => 'post',
-	     'limit' => ''
-           )
-         );
+$query = 'PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+          PREFIX sioc: <http://rdfs.org/sioc/ns#>
+	  SELECT distinct ?autor ?thema
+	  WHERE {?beitrag foaf:maker ?autor .
+		 ?beitrag sioc:topic ?thema .	
+}';
 
- echo $posts;
+$posts = $this->querylist($query, 'local/items/autorthema.phtml');
 ?>
+<table>
+ <tr>
+   <th> Autor </th>
+   <th> Thema </th>
+ </tr>
+ <tr>
+ <?= $posts;?>
+ </tr>
+</table>
 </div>

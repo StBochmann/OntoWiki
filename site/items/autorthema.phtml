@@ -1,0 +1,44 @@
+<?php
+/**
+* This file is part of the {@link http://ontowiki.net OntoWiki} project.
+*
+* @copyright Copyright (c) 2011, {@link http://aksw.org AKSW}
+* @license http://opensource.org/licenses/gpl-license.php GNU General Public License (GPL)
+*/
+
+/**
+* querylist li element template (site independent)
+*
+* this template is used in combination with the querylist helper to render
+* lists of resources which match a given SPARQL query
+*
+* TODO: make more independend from the query (e.g. take the first)
+*/
+
+//$titleHelper = new OntoWiki_Model_TitleHelper($this->model);
+
+// prepare vars from the querylist helper
+$autor = $this->autor;
+$thema = $this->thema;
+if (Erfurt_Uri::check($autor)) {
+	$titleautor = $autor;//$titleHelper->getTitle($autor);   
+}
+
+if (Erfurt_Uri::check($thema)) {
+	$titlethema = $thema;//$titleHelper->getTitle($thema);   
+}
+
+?>
+
+<tr>
+  <?php	if (Erfurt_Uri::check($autor)) : ?>
+	<td><a href="<?= $autor?>"><?= $titleautor?></a></td>
+  <?php else : ?>
+	<td><?= $autor ?></td>
+  <?php endif; ?>
+  <?php	if (Erfurt_Uri::check($thema)) : ?>
+	<td><a href="<?= $thema?>"><?= $titlethema?></a></td>
+  <?php else : ?>
+	<td><?= $thema ?></td>
+  <?php endif; ?>
+</tr>

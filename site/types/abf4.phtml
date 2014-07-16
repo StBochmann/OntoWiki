@@ -1,19 +1,53 @@
 <header class="intro">
 <h1> <?php echo $this->title ?> </h1>
 </header>
+<div class="content">
 <?php
 // uses default content properties
 //echo $this->literal(array('tag' => 'div', 'class' => 'content'));
 
-$posts = $this->query(
-       	   array(
-	     'where' => '{?resourceUri foaf:maker ?autor .
-			  ?resourceUri sioc:topic ?thema .}',
-	     'template' => 'post',
-	     'limit' => ''
-           )
-         );
+$query_or = 'PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+          PREFIX sioc: <http://rdfs.org/sioc/ns#>
+	  SELECT distinct ?beitrag ?thema
+	  WHERE {?beitrag sioc:topic ?thema .
+		 Filter (?thema = <http://aksw.org/category/erm> || ?thema = <http://aksw.org/category/aloe>)			
+}';
 
- echo $posts;
+$posts_or = $this->querylist($query_or, 'local/items/beitragthema.phtml');
 ?>
+<h2>Welche Beiträge befassen sich mit dem Thema "ERM" ODER "ALOE" </h2>
+<table>
+ <tr>
+   <th> Beitrag </th>
+   <th> Thema </th>
+ </tr>
+ <tr>
+ <?= $posts_or;?>
+ </tr>
+</table>
+
+<?php
+// uses default content properties
+//echo $this->literal(array('tag' => 'div', 'class' => 'content'));
+
+$query_and = 'PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+          PREFIX sioc: <http://rdfs.org/sioc/ns#>
+	  SELECT distinct ?beitrag ?thema
+	  WHERE {?beitrag sioc:topic ?thema .
+		 Filter (?thema = <http://aksw.org/category/erm> && ?thema = <http://aksw.org/category/aloe>)			
+}';
+
+$posts_and = $this->querylist($query_and, 'local/items/beitragthema.phtml');
+?>
+<h2>Welche Beiträge befassen sich mit dem Thema "ERM" UND "ALOE" </h2>
+<table>
+ <tr>
+   <th> Beitrag </th>
+   <th> Thema </th>
+ </tr>
+ <tr>
+  <?= $posts_and;?>
+ </tr>
+</table>
+
 </div>
